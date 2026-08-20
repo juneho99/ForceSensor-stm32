@@ -46,13 +46,7 @@ PCB
 
 힘 센서는 다음 데이터를 제공합니다.
 
-Data	Unit	Description
-Force	N	Load Cell에서 측정한 힘
-Force	kgf	Load Cell에서 측정한 힘
-Acceleration X	g	X축 가속도
-Acceleration Y	g	Y축 가속도
-Acceleration Z	g	Z축 가속도
-Total Acceleration	g	X/Y/Z축의 합성 가속도
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/e8bbf18d-96da-4e30-bda5-33c5460c47af" />
 **Total Acceleration**
 
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
