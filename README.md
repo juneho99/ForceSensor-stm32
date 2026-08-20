@@ -49,6 +49,7 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/cb5195d7-e389-49db-9012-fd9ff6181384" />
 
 **Total Acceleration**
+
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
     Total Acceleration = √(X² + Y² + Z²)
@@ -133,6 +134,7 @@ STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합�
 힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
 
 **Calibration Procedure**
+
 Load Cell에 아무것도 걸지 않은 무부하 상태에서 영점을 조정합니다.
 알고 있는 기준 무게를 Load Cell에 장착합니다.
 보정 버튼을 누릅니다.
