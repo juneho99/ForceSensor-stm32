@@ -4,6 +4,9 @@ STM32F103C8T6 기반의 **힘 및 3축 가속도 측정 센서**입니다.
 5 kg Load Cell과 HX711을 이용하여 물체에 작용하는 힘을 측정하고,
 ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가속도를 동시에 측정합니다.
 
+
+
+
 ## **📘 Overview**
 
 본 프로젝트는 교육용 물리 실험 및 센서 데이터 수집을 목적으로 개발한 힘 센서입니다.
@@ -21,6 +24,8 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 - 16 Byte 센서 데이터 패킷 제공
 
 
+
+
 ## **🧩 Product**
 
 ### 완성품
@@ -31,15 +36,25 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 ### PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
+
+
+
 ## **🏗️ System Architecture**
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/533b14b6-fb33-458f-aa8c-dee86f077a78" />
+
+
+
 
 ## **🔧 Hardware**
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c29a683f-a527-4047-803c-9da5d06a56d2" />
 
 
+
+
 ## **📋 Specifications**
 <img width="1122" height="1402" alt="Image" src="https://github.com/user-attachments/assets/b47dfb1b-0898-485e-af73-1430b2353c2c" />
+
+
 
 
 ## **📊 Measurement Data**
@@ -53,6 +68,8 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
     Total Acceleration = √(X² + Y² + Z²)
+
+
 
 
 ## **🔗 I2C Communication**
@@ -110,6 +127,8 @@ kgf 데이터가 다음과 같다면,
                    = 1.250 g
 
 
+
+
 ## **⚙️ Data Processing**
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
@@ -129,6 +148,8 @@ STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합�
     DEADBAND_WEIGHT = [최종 설정값] g
 
 
+
+
 ## **🎯 Calibration**
 
 힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
@@ -146,6 +167,8 @@ STM32 내부 EEPROM에 보정값을 저장합니다.
 **Calibration Command**
     
     0xC1
+
+
 
 
 ## **💻 Firmware**
