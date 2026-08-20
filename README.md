@@ -49,7 +49,6 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/cb5195d7-e389-49db-9012-fd9ff6181384" />
 
 **Total Acceleration**
-
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
     Total Acceleration = √(X² + Y² + Z²)
@@ -141,6 +140,7 @@ Master에서 현재 측정값을 읽습니다.
 기준 무게와 측정값을 이용하여 보정 비율을 계산합니다.
 계산된 보정값을 STM32로 전송합니다.
 STM32 내부 EEPROM에 보정값을 저장합니다.
+
 **Calibration Command**
     
     0xC1
