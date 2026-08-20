@@ -113,45 +113,7 @@ Communication Documentation
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
 
-Load Cell Raw Data
-       │
-       ▼
-Zero Adjustment
-       │
-       ▼
-Calibration
-       │
-       ▼
-EMA Filtering
-       │
-       ▼
-Deadband Processing
-       │
-       ▼
-Force Calculation
-       │
-       ├──▶ N
-       │
-       └──▶ kgf
-
-
-ADXL345 Raw Data
-       │
-       ▼
-Offset Processing
-       │
-       ▼
-EMA Filtering
-       │
-       ├──▶ Acc X
-       ├──▶ Acc Y
-       ├──▶ Acc Z
-       │
-       ▼
-Total Acceleration
-       │
-       ▼
-16-byte I2C Packet
+<img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/0d75c5b0-781a-4029-94d7-3261dfe65af7" />
 EMA Filter
 
 측정 데이터의 순간적인 노이즈를 줄이기 위해 EMA(Exponential Moving Average) 필터를 사용합니다.
