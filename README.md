@@ -32,7 +32,7 @@ PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
 **3. System Architecture**
-https://github.com/juneho99/ForceSensor-stm32/issues/2#issue-5203913916
+<img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/533b14b6-fb33-458f-aa8c-dee86f077a78" />
 
 **4. Hardware**
 Main Components
