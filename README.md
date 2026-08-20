@@ -35,14 +35,7 @@ PCB
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/533b14b6-fb33-458f-aa8c-dee86f077a78" />
 
 **4. Hardware**
-Main Components
-Component	Part	Description
-MCU	STM32F103C8T6	센서 데이터 처리 및 I2C Slave 통신
-Load Cell	5 kg Load Cell	힘 측정
-ADC	HX711	Load Cell 신호 증폭 및 24-bit ADC 변환
-Accelerometer	ADXL345	3축 가속도 측정
-Power	TPS63001	안정적인 3.3 V 전원 생성
-Level Shifter	MOSFET Level Shifter	3.3 V ↔ 5 V I2C 레벨 변환
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c29a683f-a527-4047-803c-9da5d06a56d2" />
 
 
 **5. Specifications**
