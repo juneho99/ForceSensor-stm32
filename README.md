@@ -32,60 +32,7 @@ PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
 **3. System Architecture**
-                    ┌───────────────┐
-                    │   Load Cell   │
-                    └───────┬───────┘
-                            │
-                            ▼
-                    ┌───────────────┐
-                    │     HX711     │
-                    │  24-bit ADC   │
-                    └───────┬───────┘
-                            │
-                       DOUT / SCK
-                            │
-                            ▼
-┌───────────────┐    ┌───────────────┐
-│    ADXL345    │───▶│ STM32F103C8T6 │
-│ 3-axis Accel. │ I2C│      MCU      │
-└───────────────┘    └───────┬───────┘
-                             │
-                             │ I2C
-                             ▼
-                    ┌────────────────┐
-                    │ Logic Level    │
-                    │    Shifter     │
-                    └───────┬────────┘
-                            │
-                            ▼
-                    ┌────────────────┐
-                    │ External Master│
-                    │    EZMAKER     │
-                    └────────────────┘
-데이터 흐름
-Load Cell ──▶ HX711 ──────────────┐
-                                  │
-                                  ▼
-                            STM32F103C8T6
-                                  ▲
-                                  │
-ADXL345 ──────────────────────────┘
-                                  │
-                                  ▼
-                         Data Processing
-                                  │
-                     ┌────────────┴────────────┐
-                     │                         │
-                  Force                  Acceleration
-                  N / kgf             X / Y / Z / Total
-                     │                         │
-                     └────────────┬────────────┘
-                                  │
-                                  ▼
-                        16-byte I2C Packet
-                                  │
-                                  ▼
-                         External Master
+
 
 **4. Hardware**
 Main Components
