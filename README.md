@@ -46,8 +46,8 @@ PCB
 
 힘 센서는 다음 데이터를 제공합니다.
 
-<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/e8bbf18d-96da-4e30-bda5-33c5460c47af" />
-**Total Acceleration**
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/bce5c3b7-1c14-4612-809d-31ddb824a957" />
+Total Acceleration
 
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
