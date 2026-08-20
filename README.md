@@ -53,12 +53,11 @@ Acceleration X	g	X축 가속도
 Acceleration Y	g	Y축 가속도
 Acceleration Z	g	Z축 가속도
 Total Acceleration	g	X/Y/Z축의 합성 가속도
-Total Acceleration
+**Total Acceleration**
 
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
-Total Acceleration
-= √(X² + Y² + Z²)
+Total Acceleration = √(X² + Y² + Z²)
 
 
 **7. I2C Communication**
