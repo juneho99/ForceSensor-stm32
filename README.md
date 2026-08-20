@@ -51,7 +51,7 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 
 합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
 
-Total Acceleration = √(X² + Y² + Z²)
+    Total Acceleration = √(X² + Y² + Z²)
 
 
 ## **🔗 I2C Communication**
@@ -108,31 +108,31 @@ kgf 데이터가 다음과 같다면,
     Acceleration Y = 1250 / 1000
                    = 1.250 g
 
-자세한 통신 규격은 아래 문서를 참고합니다.
-
 
 ## **⚙️ Data Processing**
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
 
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/0d75c5b0-781a-4029-94d7-3261dfe65af7" />
-EMA Filter
+
+**EMA Filter**
 
 측정 데이터의 순간적인 노이즈를 줄이기 위해 EMA(Exponential Moving Average) 필터를 사용합니다.
 
-EMA_ALPHA = 0.3
-Weight/Force Deadband
+    EMA_ALPHA = 0.3
+
+**Weight/Force Deadband**
 
 무부하 상태에서 발생하는 미세한 Load Cell 측정값 변동을 줄이기 위해 데드밴드를 적용합니다.
 
-DEADBAND_WEIGHT = [최종 설정값] g
+    DEADBAND_WEIGHT = [최종 설정값] g
 
 
 ## **🎯 Calibration**
 
 힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
 
-Calibration Procedure
+**Calibration Procedure**
 Load Cell에 아무것도 걸지 않은 무부하 상태에서 영점을 조정합니다.
 알고 있는 기준 무게를 Load Cell에 장착합니다.
 보정 버튼을 누릅니다.
@@ -140,12 +140,9 @@ Master에서 현재 측정값을 읽습니다.
 기준 무게와 측정값을 이용하여 보정 비율을 계산합니다.
 계산된 보정값을 STM32로 전송합니다.
 STM32 내부 EEPROM에 보정값을 저장합니다.
-Calibration Command
-0xC1
-
-자세한 보정 방법은 아래 문서를 참고합니다.
-
-Calibration Documentation
+**Calibration Command**
+    
+    0xC1
 
 
 ## **💻 Firmware**
@@ -153,29 +150,29 @@ Calibration Documentation
 펌웨어는 크게 두 부분으로 구성됩니다.
 
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/43b1cf55-f94d-45a4-83cd-3db19acd4f22" />
-STM32 Firmware
+
+**STM32 Firmware**
 
 STM32는 다음 작업을 담당합니다.
+- HX711 데이터 읽기
+- ADXL345 데이터 읽기
+- Load Cell 영점 처리
+- Load Cell 보정
+- EMA Filtering
+- Force(N) 계산
+- Force(kgf) 계산
+- X/Y/Z축 가속도 계산
+- 합성 가속도 계산
+- 16 Byte 데이터 패킷 생성
+- I2C Slave 통신
 
-HX711 데이터 읽기
-ADXL345 데이터 읽기
-Load Cell 영점 처리
-Load Cell 보정
-EMA Filtering
-Force(N) 계산
-Force(kgf) 계산
-X/Y/Z축 가속도 계산
-합성 가속도 계산
-16 Byte 데이터 패킷 생성
-I2C Slave 통신
-EZMAKER Firmware
+**EZMAKER Firmware**
 
 외부 Master는 다음 작업을 담당합니다.
-
-STM32 센서 데이터 요청
-16 Byte 패킷 수신
-Force(N/kgf) 데이터 처리
-X/Y/Z축 가속도 데이터 처리
-합성 가속도 데이터 처리
-센서 데이터 출력
-Load Cell 보정 명령 전송
+- STM32 센서 데이터 요청
+- 16 Byte 패킷 수신
+- Force(N/kgf) 데이터 처리
+- X/Y/Z축 가속도 데이터 처리
+- 합성 가속도 데이터 처리
+- 센서 데이터 출력
+- Load Cell 보정 명령 전송
