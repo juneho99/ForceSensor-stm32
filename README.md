@@ -21,28 +21,28 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 - 16 Byte 센서 데이터 패킷 제공
 
 
-**2. Product**
+## **2. Product**
 
-완성품
-
-
+### 완성품
 
 
-PCB
+
+
+### PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
-**3. System Architecture**
+## **3. System Architecture**
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/533b14b6-fb33-458f-aa8c-dee86f077a78" />
 
-**4. Hardware**
+## **4. Hardware**
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c29a683f-a527-4047-803c-9da5d06a56d2" />
 
 
-**5. Specifications**
+## **5. Specifications**
 <img width="1122" height="1402" alt="Image" src="https://github.com/user-attachments/assets/b47dfb1b-0898-485e-af73-1430b2353c2c" />
 
 
-**6. Measurement Data**
+## **6. Measurement Data**
 
 힘 센서는 다음 데이터를 제공합니다.
 
@@ -54,7 +54,7 @@ Total Acceleration
 Total Acceleration = √(X² + Y² + Z²)
 
 
-**7. I2C Communication**
+## **7. I2C Communication**
 
 STM32는 I2C Slave로 동작하며 외부 Master 장치가 센서 데이터를 요청합니다.
 
@@ -109,7 +109,7 @@ Acceleration Y = 1250 / 1000
 Communication Documentation
 
 
-**8. Data Processing**
+## **8. Data Processing**
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
 
@@ -126,7 +126,7 @@ Weight/Force Deadband
 DEADBAND_WEIGHT = [최종 설정값] g
 
 
-**9. Calibration**
+## **9. Calibration**
 
 힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
 
@@ -146,7 +146,7 @@ Calibration Command
 Calibration Documentation
 
 
-**10. Firmware**
+## **10. Firmware**
 
 펌웨어는 크게 두 부분으로 구성됩니다.
 
