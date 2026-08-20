@@ -133,7 +133,7 @@ kgf 데이터가 다음과 같다면,
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
 
-<img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/0d75c5b0-781a-4029-94d7-3261dfe65af7" />
+<img width="1447" height="1087" alt="Image" src="https://github.com/user-attachments/assets/1efefe8c-2ac1-49ef-9f6c-86564b631551" />
 
 **EMA Filter**
 
