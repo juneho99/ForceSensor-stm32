@@ -39,21 +39,7 @@ PCB
 
 
 **5. Specifications**
-Item	Specification
-MCU	STM32F103C8T6
-Load Cell	5 kg
-Force Range	약 ±49 N
-Force Unit	N / kgf
-Load Cell ADC	HX711
-Accelerometer	ADXL345
-Acceleration Data	X / Y / Z / Total
-Communication	I2C
-I2C Slave Address	0x08
-Data Packet	16 Bytes
-Force N Data	N × 1000
-Force kgf Data	kgf × 1000
-Acceleration Data	g × 1000
-STM32 Logic Voltage	3.3 V
+<img width="1122" height="1402" alt="Image" src="https://github.com/user-attachments/assets/b47dfb1b-0898-485e-af73-1430b2353c2c" />
 
 
 **6. Measurement Data**
