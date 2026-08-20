@@ -150,13 +150,7 @@ Calibration Documentation
 
 펌웨어는 크게 두 부분으로 구성됩니다.
 
-firmware/
-│
-├── stm32/
-│   └── force_sensor_slave.ino
-│
-└── ezmaker/
-    └── force_sensor_master.ino
+<img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/43b1cf55-f94d-45a4-83cd-3db19acd4f22" />
 STM32 Firmware
 
 STM32는 다음 작업을 담당합니다.
