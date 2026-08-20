@@ -79,14 +79,7 @@ typedef union {
 
     uint8_t buffer[16];
 } Packet_t;
-Packet Structure
-Byte	Data	Type	Scale
-0 ~ 3	Force (N)	int32_t	N × 1000
-4 ~ 7	Force (kgf)	int32_t	kgf × 1000
-8 ~ 9	Acceleration X	int16_t	g × 1000
-10 ~ 11	Acceleration Y	int16_t	g × 1000
-12 ~ 13	Acceleration Z	int16_t	g × 1000
-14 ~ 15	Total Acceleration	int16_t	g × 1000
+<img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/834c726d-6b12-4ea5-a7db-e865fe2c577e" />
 Force Example
 force_N1000 = 9810
 
