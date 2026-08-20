@@ -1,27 +1,310 @@
 STM32F103C8T6 기반의 힘 및 3축 가속도 측정 센서입니다.
 
 5 kg Load Cell과 HX711을 이용하여 물체에 작용하는 힘을 측정하고,
-ADXL345 3축 가속도 센서를 이용하여 센서의 움직임 변화를 동시에 측정합니다.
+ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가속도를 동시에 측정합니다.
 
 **1. Overview**
 
-본 프로젝트는 교육용 실험 및 센서 데이터 수집을 목적으로 개발한 힘 센서입니다.
+본 프로젝트는 교육용 물리 실험 및 센서 데이터 수집을 목적으로 개발한 힘 센서입니다.
 
 주요 기능은 다음과 같습니다.
 
-- Load Cell을 이용한 무게 측정
-- 측정된 무게를 힘(N)으로 변환
-- ADXL345를 이용한 X/Y/Z축 가속도 측정
-- STM32에서 센서 데이터 처리
-- EMA 필터를 이용한 데이터 안정화
-- 영점 조정 지원
-- 기준 무게를 이용한 힘 센서 보정
-- I2C를 이용한 외부 Master 장치와의 통신
+Load Cell을 이용한 힘 측정
+힘을 N 및 kgf 단위로 제공
+ADXL345를 이용한 X/Y/Z축 가속도 측정
+X/Y/Z축을 이용한 합성 가속도 측정
+STM32에서 센서 데이터 처리
+EMA 필터를 이용한 데이터 안정화
+영점 조정 지원
+기준 무게를 이용한 Load Cell 보정
+I2C를 이용한 외부 Master 장치와의 통신
+16 Byte 센서 데이터 패킷 제공
+
 
 **2. Product**
+완성품
 
+
+
+
+PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
+**3. System Architecture**
+                    ┌───────────────┐
+                    │   Load Cell   │
+                    └───────┬───────┘
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │     HX711     │
+                    │  24-bit ADC   │
+                    └───────┬───────┘
+                            │
+                       DOUT / SCK
+                            │
+                            ▼
+┌───────────────┐    ┌───────────────┐
+│    ADXL345    │───▶│ STM32F103C8T6 │
+│ 3-axis Accel. │ I2C│      MCU      │
+└───────────────┘    └───────┬───────┘
+                             │
+                             │ I2C
+                             ▼
+                    ┌────────────────┐
+                    │ Logic Level    │
+                    │    Shifter     │
+                    └───────┬────────┘
+                            │
+                            ▼
+                    ┌────────────────┐
+                    │ External Master│
+                    │    EZMAKER     │
+                    └────────────────┘
+데이터 흐름
+Load Cell ──▶ HX711 ──────────────┐
+                                  │
+                                  ▼
+                            STM32F103C8T6
+                                  ▲
+                                  │
+ADXL345 ──────────────────────────┘
+                                  │
+                                  ▼
+                         Data Processing
+                                  │
+                     ┌────────────┴────────────┐
+                     │                         │
+                  Force                  Acceleration
+                  N / kgf             X / Y / Z / Total
+                     │                         │
+                     └────────────┬────────────┘
+                                  │
+                                  ▼
+                        16-byte I2C Packet
+                                  │
+                                  ▼
+                         External Master
+
+**4. Hardware**
+Main Components
+Component	Part	Description
+MCU	STM32F103C8T6	센서 데이터 처리 및 I2C Slave 통신
+Load Cell	5 kg Load Cell	힘 측정
+ADC	HX711	Load Cell 신호 증폭 및 24-bit ADC 변환
+Accelerometer	ADXL345	3축 가속도 측정
+Power	TPS63001	안정적인 3.3 V 전원 생성
+Level Shifter	MOSFET Level Shifter	3.3 V ↔ 5 V I2C 레벨 변환
 
 
+**5. Specifications**
+Item	Specification
+MCU	STM32F103C8T6
+Load Cell	5 kg
+Force Range	약 ±49 N
+Force Unit	N / kgf
+Load Cell ADC	HX711
+Accelerometer	ADXL345
+Acceleration Data	X / Y / Z / Total
+Communication	I2C
+I2C Slave Address	0x08
+Data Packet	16 Bytes
+Force N Data	N × 1000
+Force kgf Data	kgf × 1000
+Acceleration Data	g × 1000
+STM32 Logic Voltage	3.3 V
 
+
+**6. Measurement Data**
+
+힘 센서는 다음 데이터를 제공합니다.
+
+Data	Unit	Description
+Force	N	Load Cell에서 측정한 힘
+Force	kgf	Load Cell에서 측정한 힘
+Acceleration X	g	X축 가속도
+Acceleration Y	g	Y축 가속도
+Acceleration Z	g	Z축 가속도
+Total Acceleration	g	X/Y/Z축의 합성 가속도
+Total Acceleration
+
+합성 가속도는 X/Y/Z축 데이터를 이용하여 계산합니다.
+
+Total Acceleration
+= √(X² + Y² + Z²)
+
+
+**7. I2C Communication**
+
+STM32는 I2C Slave로 동작하며 외부 Master 장치가 센서 데이터를 요청합니다.
+
+Slave Address
+0x08
+
+I2C 주소는 고정으로 사용합니다.
+
+Data Packet
+
+센서 데이터는 총 16 Bytes로 구성됩니다.
+
+typedef union {
+    struct __attribute__((packed)) {
+        int32_t force_N1000;
+        int32_t force_kgf1000;
+        int16_t accX_g1000;
+        int16_t accY_g1000;
+        int16_t accZ_g1000;
+        int16_t accTotal_g1000;
+    } val;
+
+    uint8_t buffer[16];
+} Packet_t;
+Packet Structure
+Byte	Data	Type	Scale
+0 ~ 3	Force (N)	int32_t	N × 1000
+4 ~ 7	Force (kgf)	int32_t	kgf × 1000
+8 ~ 9	Acceleration X	int16_t	g × 1000
+10 ~ 11	Acceleration Y	int16_t	g × 1000
+12 ~ 13	Acceleration Z	int16_t	g × 1000
+14 ~ 15	Total Acceleration	int16_t	g × 1000
+Force Example
+force_N1000 = 9810
+
+실제 힘은 다음과 같습니다.
+
+Force = 9810 / 1000
+      = 9.810 N
+
+kgf 데이터가 다음과 같다면,
+
+force_kgf1000 = 1000
+
+실제 힘은 다음과 같습니다.
+
+Force = 1000 / 1000
+      = 1.000 kgf
+Acceleration Example
+accY_g1000 = 1250
+
+실제 Y축 가속도는 다음과 같습니다.
+
+Acceleration Y = 1250 / 1000
+               = 1.250 g
+
+자세한 통신 규격은 아래 문서를 참고합니다.
+
+Communication Documentation
+
+
+**8. Data Processing**
+
+STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
+
+Load Cell Raw Data
+       │
+       ▼
+Zero Adjustment
+       │
+       ▼
+Calibration
+       │
+       ▼
+EMA Filtering
+       │
+       ▼
+Deadband Processing
+       │
+       ▼
+Force Calculation
+       │
+       ├──▶ N
+       │
+       └──▶ kgf
+
+
+ADXL345 Raw Data
+       │
+       ▼
+Offset Processing
+       │
+       ▼
+EMA Filtering
+       │
+       ├──▶ Acc X
+       ├──▶ Acc Y
+       ├──▶ Acc Z
+       │
+       ▼
+Total Acceleration
+       │
+       ▼
+16-byte I2C Packet
+EMA Filter
+
+측정 데이터의 순간적인 노이즈를 줄이기 위해 EMA(Exponential Moving Average) 필터를 사용합니다.
+
+EMA_ALPHA = 0.3
+Weight/Force Deadband
+
+무부하 상태에서 발생하는 미세한 Load Cell 측정값 변동을 줄이기 위해 데드밴드를 적용합니다.
+
+DEADBAND_WEIGHT = [최종 설정값] g
+
+
+**9. Calibration**
+
+힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
+
+Calibration Procedure
+Load Cell에 아무것도 걸지 않은 무부하 상태에서 영점을 조정합니다.
+알고 있는 기준 무게를 Load Cell에 장착합니다.
+보정 버튼을 누릅니다.
+Master에서 현재 측정값을 읽습니다.
+기준 무게와 측정값을 이용하여 보정 비율을 계산합니다.
+계산된 보정값을 STM32로 전송합니다.
+STM32 내부 EEPROM에 보정값을 저장합니다.
+Calibration Command
+0xC1
+
+자세한 보정 방법은 아래 문서를 참고합니다.
+
+Calibration Documentation
+
+
+**10. Firmware**
+
+펌웨어는 크게 두 부분으로 구성됩니다.
+
+firmware/
+│
+├── stm32/
+│   └── force_sensor_slave.ino
+│
+└── ezmaker/
+    └── force_sensor_master.ino
+STM32 Firmware
+
+STM32는 다음 작업을 담당합니다.
+
+HX711 데이터 읽기
+ADXL345 데이터 읽기
+Load Cell 영점 처리
+Load Cell 보정
+EMA Filtering
+Force(N) 계산
+Force(kgf) 계산
+X/Y/Z축 가속도 계산
+합성 가속도 계산
+16 Byte 데이터 패킷 생성
+I2C Slave 통신
+EZMAKER Firmware
+
+외부 Master는 다음 작업을 담당합니다.
+
+STM32 센서 데이터 요청
+16 Byte 패킷 수신
+Force(N/kgf) 데이터 처리
+X/Y/Z축 가속도 데이터 처리
+합성 가속도 데이터 처리
+센서 데이터 출력
+Load Cell 보정 명령 전송
