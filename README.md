@@ -4,7 +4,7 @@ STM32F103C8T6 기반의 **힘 및 3축 가속도 측정 센서**입니다.
 5 kg Load Cell과 HX711을 이용하여 물체에 작용하는 힘을 측정하고,
 ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가속도를 동시에 측정합니다.
 
-## **1. Overview**
+## **📘 Overview**
 
 본 프로젝트는 교육용 물리 실험 및 센서 데이터 수집을 목적으로 개발한 힘 센서입니다.
 
@@ -21,7 +21,7 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 - 16 Byte 센서 데이터 패킷 제공
 
 
-## **2. Product**
+## **🧩 Product**
 
 ### 완성품
 
@@ -31,18 +31,18 @@ ADXL345 3축 가속도 센서를 이용하여 X/Y/Z축 가속도와 합성 가�
 ### PCB
 <img width="840" height="582" alt="Image" src="https://github.com/user-attachments/assets/33daeb7f-3711-4d9c-9872-adcb64a3cae5" />
 
-## **3. System Architecture**
+## **🏗️ System Architecture**
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/533b14b6-fb33-458f-aa8c-dee86f077a78" />
 
-## **4. Hardware**
+## **🔧 Hardware**
 <img width="1536" height="1024" alt="Image" src="https://github.com/user-attachments/assets/c29a683f-a527-4047-803c-9da5d06a56d2" />
 
 
-## **5. Specifications**
+## **📋 Specifications**
 <img width="1122" height="1402" alt="Image" src="https://github.com/user-attachments/assets/b47dfb1b-0898-485e-af73-1430b2353c2c" />
 
 
-## **6. Measurement Data**
+## **📊 Measurement Data**
 
 힘 센서는 다음 데이터를 제공합니다.
 
@@ -54,7 +54,7 @@ Total Acceleration
 Total Acceleration = √(X² + Y² + Z²)
 
 
-## **7. I2C Communication**
+## **🔗 I2C Communication**
 
 STM32는 I2C Slave로 동작하며 외부 Master 장치가 센서 데이터를 요청합니다.
 
@@ -67,49 +67,51 @@ Data Packet
 
 센서 데이터는 총 16 Bytes로 구성됩니다.
 
-typedef union {
-    struct __attribute__((packed)) {
-        int32_t force_N1000;
-        int32_t force_kgf1000;
-        int16_t accX_g1000;
-        int16_t accY_g1000;
-        int16_t accZ_g1000;
-        int16_t accTotal_g1000;
-    } val;
-
-    uint8_t buffer[16];
-} Packet_t;
+    typedef union {
+        struct __attribute__((packed)) {
+            int32_t force_N1000;
+            int32_t force_kgf1000;
+            int16_t accX_g1000;
+            int16_t accY_g1000;
+            int16_t accZ_g1000;
+            int16_t accTotal_g1000;
+        } val;
+        uint8_t buffer[16];
+    } Packet_t;
+    
 <img width="1448" height="1086" alt="Image" src="https://github.com/user-attachments/assets/834c726d-6b12-4ea5-a7db-e865fe2c577e" />
-Force Example
-force_N1000 = 9810
+
+**Force Example**
+
+    force_N1000 = 9810
 
 실제 힘은 다음과 같습니다.
 
-Force = 9810 / 1000
-      = 9.810 N
+    Force = 9810 / 1000
+          = 9.810 N
 
 kgf 데이터가 다음과 같다면,
 
-force_kgf1000 = 1000
+    force_kgf1000 = 1000
 
 실제 힘은 다음과 같습니다.
 
-Force = 1000 / 1000
-      = 1.000 kgf
-Acceleration Example
-accY_g1000 = 1250
+    Force = 1000 / 1000
+          = 1.000 kgf
+          
+**Acceleration Example**
+
+    accY_g1000 = 1250
 
 실제 Y축 가속도는 다음과 같습니다.
 
-Acceleration Y = 1250 / 1000
-               = 1.250 g
+    Acceleration Y = 1250 / 1000
+                   = 1.250 g
 
 자세한 통신 규격은 아래 문서를 참고합니다.
 
-Communication Documentation
 
-
-## **8. Data Processing**
+## **⚙️ Data Processing**
 
 STM32에서는 각 센서의 데이터를 읽은 후 다음 과정을 수행합니다.
 
@@ -126,7 +128,7 @@ Weight/Force Deadband
 DEADBAND_WEIGHT = [최종 설정값] g
 
 
-## **9. Calibration**
+## **🎯 Calibration**
 
 힘 센서는 기준 무게를 이용한 Load Cell 보정을 지원합니다.
 
@@ -146,7 +148,7 @@ Calibration Command
 Calibration Documentation
 
 
-## **10. Firmware**
+## **💻 Firmware**
 
 펌웨어는 크게 두 부분으로 구성됩니다.
 
